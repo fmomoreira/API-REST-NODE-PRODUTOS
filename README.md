@@ -55,11 +55,31 @@ Swagger documentation will be available at http://localhost:3000/docs
 - Email: admin@admin.com
 - Password: admin123
 
+## Authentication Flow
+
+The API uses JWT (JSON Web Tokens) with a two-token system:
+
+1. **Access Token**:
+   - Short-lived token for API access
+   - Used in the `Authorization: Bearer <token>` header
+   - When expired, returns `{ "message": "Token expired", "code": "TOKEN_EXPIRED" }`
+
+2. **Refresh Token**:
+   - Long-lived token for getting new access tokens
+   - Used when the access token expires
+   - Prevents frequent logins
+
+### Token Error Codes
+- `TOKEN_EXPIRED` - The access token has expired
+- `INVALID_TOKEN` - The token is malformed or invalid
+- `AUTH_FAILED` - Other authentication errors
+
 ## API Endpoints
 
 ### Authentication
 - POST `/auth/register` - Register a new user
-- POST `/auth/login` - Login user
+- POST `/auth/login` - Login user (returns access and refresh tokens)
+- POST `/auth/refresh` - Get new access token using refresh token
 
 ### Users
 - GET `/users/me` - Get authenticated user data

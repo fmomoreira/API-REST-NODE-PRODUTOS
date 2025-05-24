@@ -26,7 +26,22 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
     req.user = user;
     next();
   } catch (error) {
-    return res.status(401).json({ message: 'Invalid token' });
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({
+        message: 'Token expired',
+        code: 'TOKEN_EXPIRED'
+      });
+    }
+    if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({
+        message: 'Invalid token',
+        code: 'INVALID_TOKEN'
+      });
+    }
+    return res.status(401).json({
+      message: 'Authentication failed',
+      code: 'AUTH_FAILED'
+    });
   }
 };
 
