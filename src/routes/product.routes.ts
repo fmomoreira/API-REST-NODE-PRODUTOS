@@ -6,7 +6,7 @@ import { productSchema } from '../validations/schemas';
 
 const router = Router();
 
-router.get('/', authenticate, listProducts);
+router.get('/', listProducts);
 router.post('/', authenticate, validate(productSchema), createProduct);
 
 export default router;

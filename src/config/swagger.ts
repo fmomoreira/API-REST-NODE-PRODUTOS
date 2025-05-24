@@ -14,11 +14,6 @@ export const swaggerDocument = {
       }
     }
   },
-  security: [
-    {
-      bearerAuth: []
-    }
-  ],
   paths: {
     '/auth/register': {
       post: {
@@ -85,8 +80,7 @@ export const swaggerDocument = {
     '/products': {
       get: {
         tags: ['Products'],
-        summary: 'List all products',
-        security: [{ bearerAuth: [] }],
+        summary: 'List all products (Public)',
         responses: {
           200: {
             description: 'List of products'
@@ -95,7 +89,7 @@ export const swaggerDocument = {
       },
       post: {
         tags: ['Products'],
-        summary: 'Create a new product',
+        summary: 'Create a new product (Requires authentication)',
         security: [{ bearerAuth: [] }],
         requestBody: {
           required: true,

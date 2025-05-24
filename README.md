@@ -65,8 +65,8 @@ Swagger documentation will be available at http://localhost:3000/docs
 - GET `/users/me` - Get authenticated user data
 
 ### Products
-- GET `/products` - List all products
-- POST `/products` - Create a new product
+- GET `/products` - List all products (Public)
+- POST `/products` - Create a new product (Requires authentication)
 
 ## Development
 
